@@ -1,0 +1,21 @@
+The file nginx_mail_proxy_auth.ru, once set executable (chmod +x), may be run anywhere.  Nginx will be able to communicate with this authentication service for its mail proxy module.
+
+As this is just an example, it is recommended to re-implement the auth method to actually do authentication against a source of information about your mail platform.  For example, by using LDAP:
+
+    require 'net/ldap'
+
+    def auth( user, pass )
+      ldap = Net::LDAP.new( :host => @ldapserver )
+      filter = Net::LDAP::Filter.eq( "uid", "#{user}" ) | Net::LDAP::Filter.eq( "mail", "#{user}" )
+      res = ldap.bind_as(:filter => filter, :base => @base, :password => pass)
+      @mailhost ||= res.first[:mailhost]
+      res && res.first[:uid]
+    end
+
+Try it out and see how it goes.
+
+Resources for further information:
+
+Installing Ruby: https://rvm.io
+Using Rack: http://rack.github.com
+

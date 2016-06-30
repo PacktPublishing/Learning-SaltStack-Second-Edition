@@ -1,0 +1,23 @@
+<html>
+  <head>
+    <title>*** SSI test page ***</title>
+    <link rel="stylesheet" href="/css/layout.css" type="text/css"/>
+      <!--# block name="boilerplate" -->
+      <p>...</p>
+      <!--# endblock -->
+  </head>
+  <body>
+    <div id="header">
+      <!--# include virtual="/render/header?page=$uri" stub="boilerplate" -->
+    </div>
+    <div id="menu">
+      <!--# include virtual="/render/menu?page=$uri" stub="boilerplate" -->
+    </div>
+    <div id="content">
+      <p>This is the content of the page.</p>
+    </div>
+    <div id="footer">
+      <!--# include virtual="/render/footer?page=$uri" stub="boilerplate" -->
+    </div>
+  </body>
+</html>
